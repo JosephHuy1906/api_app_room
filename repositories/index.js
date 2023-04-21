@@ -1,3 +1,4 @@
-import user from './user.js'
+import user from './user.js';
+import roomRepositories from './room.js';
 
-export {user}
+export { user, roomRepositories };

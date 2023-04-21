@@ -1,17 +1,12 @@
-import express  from "express";
-import httpStatusCode from "../exceptions/httpStatusCode.js";
+import express from 'express';
+import httpStatusCode from '../exceptions/httpStatusCode.js';
+import { roomController } from '../controllers/index.js';
 const router = express.Router();
 
-
-router.get('/', (req, res)=>{
-    res.status(httpStatusCode.OK).json({message: "Trang Room"})
-})
-
-router.post('/create', (req, res)=>{
-    const room = req.body;
-    console.log(room);
-    res.status(httpStatusCode.OK).json({message: "Trang Room"})
-})
-
+router.get('/', roomController.getAllRoom);
+router.get('/detail/:id', roomController.getDetailRoom);
+router.put('/insertprice', roomController.InsertPrice);
+router.put('/insertguest', roomController.InsertGuest);
+router.post('/create', roomController.createRoom);
 
 export default router;

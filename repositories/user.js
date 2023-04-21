@@ -1,5 +1,4 @@
 import Exception from '../exceptions/Exception.js';
-import { OutputType, print } from '../helpers/print.js';
 import { Usermodel } from '../models/index.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
