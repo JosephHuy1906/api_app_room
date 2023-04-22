@@ -2,12 +2,13 @@ import Exception from '../exceptions/Exception.js';
 import { Room } from '../models/index.js';
 
 
-const InsertRoom = async ({ idKhu, name, tienPhong = [], khachThue = [] }) => {
+const InsertRoom = async ({ idKhu, name, tienPhong,tienThueThang = [], khachThue = [] }) => {
     try {
         const room = await Room.create({
             idKhu,
             name,
             tienPhong,
+            tienThueThang,
             khachThue,
         });
     } catch (err) {
@@ -19,9 +20,9 @@ const InsertRoom = async ({ idKhu, name, tienPhong = [], khachThue = [] }) => {
     }
 };
 
-const InsertPrice = async ({ id, tienPhong }) => {
+const InsertPrice = async ({ id, tienThueThang }) => {
     const roomId = await Room.findById(id);
-    roomId.tienPhong.push(tienPhong);
+    roomId.tienThueThang.push(tienThueThang);
     await roomId.save();
     return roomId;
 };
@@ -35,7 +36,6 @@ const InsertGuest = async ({ id, khachThue }) => {
 const checkTimeDay = async () => {
 
     const collection = Room.find();
-
     const eventsCollection = context.services.get('mongodb-atlas').db('myDatabase').collection('events');
     const now = new Date();
     const docs = await collection.find({ active: true, expiration_date: { $lte: now } }).toArray();

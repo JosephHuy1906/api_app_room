@@ -6,14 +6,17 @@ export default mongoose.model(
     new Schema({
         id: { type: ObjectId },
         name: { type: String, required: true },
-        idKhu: { type: Number, required: true },
-
-        tienPhong: [
+        idKhu: { type: String, required: true },
+        tienPhong: { type: Number, required: true },
+        tienThueThang: [
             {
                 tienTro: { type: Number },
                 tienDien: { type: Number },
+                tienNuoc: { type: Number },
+                tienWifi: { type: Number },
+                tienRac: { type: Number },
                 chiPhiKhac: { type: Number },
-                tongTien: { type: Number,  },
+                tongTien: { type: Number },
                 initializationDate: {
                     type: Date,
                     default: Date.now,
@@ -34,7 +37,6 @@ export default mongoose.model(
                 cccd: { type: String },
                 ngaySinh: { type: String },
                 diaChi: { type: String },
-
             },
         ],
     }),
