@@ -26,14 +26,20 @@ const login = async (req, res) => {
 
 const getAll = async (req, res) => {
     const data = await Usermodel.find();
-    res.status(httpStatusCode.OK).json({ data: data });
+    res.status(httpStatusCode.OK).json({ 
+        message: "get data successfully",
+        data: data
+     });
 };
 
 const getDetail = async (req, res) => {
     let id = req.params.id;
     try {
        const us = await user.getDetail(id);
-        res.status(httpStatusCode.OK).json({ data: us });
+        res.status(httpStatusCode.OK).json({ 
+            message: "get data successfully",
+            data: us
+         });
     } catch (err) {
         res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({
             message: err.toString(),

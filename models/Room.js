@@ -5,7 +5,6 @@ export default mongoose.model(
     'Room',
     new Schema({
         id: { type: ObjectId },
-
         name: { type: String, required: true },
         idKhu: { type: Number, required: true },
 

@@ -5,17 +5,20 @@ const getAllPart = async (req, res) => {
     const data = await Partitiined.find();
     return data;
 };
-const getDetailPart = async () =>{
+const getDetailPart = async () => {
     const detail = await Partitiined.findById(id);
     return detail ?? {};
-}
-const insertPart = async () =>{
+};
+const insertPart = async ({ name, price: { tienNuoc, tienDien, tienRac, tienWifi } }) => {
     try {
-        const room = await Room.create({
-            idKhu,
+        const room = await Partitiined.create({
             name,
-            tienPhong,
-            khachThue,
+            price: {
+                tienNuoc,
+                tienDien,
+                tienRac,
+                tienWifi,
+            },
         });
     } catch (err) {
         if (!!err.errors) {
@@ -24,14 +27,14 @@ const insertPart = async () =>{
             throw new Exception(Exception);
         }
     }
-}
-const updatePart = async () =>{}
-const deletePart = async () =>{}
+};
+const updatePart = async () => {};
+const deletePart = async () => {};
 
 export default {
     getAllPart,
     getDetailPart,
     insertPart,
     updatePart,
-    deletePart
-}
+    deletePart,
+};

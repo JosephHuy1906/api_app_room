@@ -4,7 +4,7 @@ import { userController } from '../controllers/index.js';
 
 
 router.get('/', userController.getAll);
-router.get('/:id', userController.getDetail);
+router.get('/detail/:id', userController.getDetail);
 router.post('/login', userController.login);
 router.post('/register', userController.register);
 

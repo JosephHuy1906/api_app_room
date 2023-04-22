@@ -4,7 +4,7 @@ dotenv.config();
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import connect from './models/database.js';
-import { userRouter, roomRouter } from './router/index.js';
+import { userRouter, roomRouter, partitiinedRouter } from './router/index.js';
 
 const app = express();
 const port = process.env.PORT || 3002;
@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/apiuser', userRouter);
 app.use('/apiroom', roomRouter);
+app.use('/apipartitiinde', partitiinedRouter);
 app.use(
     cors({
         origin: '*',

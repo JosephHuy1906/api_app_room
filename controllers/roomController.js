@@ -1,6 +1,28 @@
 import httpStatusCode from '../exceptions/httpStatusCode.js';
 import { roomRepositories } from '../repositories/index.js';
 
+
+const getAllRoom = async (req, res) => {
+    let data = await roomRepositories.getAllRoom();
+    res.status(httpStatusCode.OK).json({
+        message: "get data successfully",
+        data: data,
+    });
+};
+const getDetailRoom = async (req, res) => {
+    let id = req.params.id;
+    try {
+        const us = await roomRepositories.getRoomById(id);
+        res.status(httpStatusCode.OK).json({ 
+            message: "get data successfully",
+            data: us
+         });
+    } catch (err) {
+        res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: err.toString(),
+        });
+    }
+};
 const createRoom = async (req, res) => {
     try {
         const room = await roomRepositories.InsertRoom(req.body);
@@ -13,12 +35,6 @@ const createRoom = async (req, res) => {
             message: 'Cannot Insert Room: ' + err,
         });
     }
-};
-const getAllRoom = async (req, res) => {
-    let data = await roomRepositories.getAllRoom();
-    res.status(httpStatusCode.OK).json({
-        data: data,
-    });
 };
 const InsertPrice = async (req, res) => {
     const { id, tienPhong } = req.body;
@@ -53,17 +69,7 @@ const InsertGuest = async (req, res) => {
 const updateGuest = async (req, res) => {};
 const getIdGuest = async (req, res) => {};
 
-const getDetailRoom = async (req, res) => {
-    let id = req.params.id;
-    try {
-        const us = await roomRepositories.getRoomById(id);
-        res.status(httpStatusCode.OK).json({ data: us });
-    } catch (err) {
-        res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({
-            message: err.toString(),
-        });
-    }
-};
+
 const deleteRoom = async (req, res) => {};
 
 export default {

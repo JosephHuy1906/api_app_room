@@ -6,13 +6,11 @@ export default mongoose.model(
     new Schema({
         id: { type: ObjectId },
         name: { type: String, required: true },
-        price: [
-            {
-                tienNuoc: { type: Number },
-                tienDien: { type: Number },
-                tienRac: { type: Number },
-                tienWifi: { type: Number },
-            },
-        ],
+        price: {
+            tienNuoc: { type: Number, required: true },
+            tienDien: { type: Number, required: true },
+            tienRac: { type: Number, required: true },
+            tienWifi: { type: Number, required: true },
+        },
     }),
 );
