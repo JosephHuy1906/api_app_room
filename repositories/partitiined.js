@@ -28,13 +28,23 @@ const insertPart = async ({ name, price: { tienNuoc, tienDien, tienRac, tienWifi
         }
     }
 };
-const updatePart = async () => {};
+const updatePartPrice = async ({ id,name, tienNuoc, tienDien, tienRac, tienWifi }) => {
+    let parti = await Partitiined.findById(id);
+
+    parti.name = name ?? parti.name;
+    parti.price.tienNuoc = tienNuoc ?? parti.price.tienNuoc;
+    parti.price.tienDien = tienDien ?? parti.price.tienDien;
+    parti.price.tienRac = tienRac ?? parti.price.tienRac;
+    parti.price.tienWifi = tienWifi ?? parti.price.tienWifi;
+    parti.save();
+    return parti;
+};
 const deletePart = async () => {};
 
 export default {
     getAllPart,
     getDetailPart,
     insertPart,
-    updatePart,
     deletePart,
+    updatePartPrice,
 };

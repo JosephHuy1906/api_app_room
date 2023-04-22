@@ -40,7 +40,20 @@ const insertPart = async (req, res) => {
         });
     }
 };
-const updatePart = async (req, res) => {};
+const updatePart = async (req, res) => {
+    const { id,name, tienNuoc, tienDien, tienRac, tienWifi } = req.body;
+
+    try {
+        await partRepositories.updatePartPrice(req.body);
+        res.status(httpStatusCode.OK).json({
+            message: 'update partitiined successfuly',
+        });
+    } catch (err) {
+        res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: 'Cannot update partitiined: ' + err,
+        });
+    }
+};
 const deletePart = async (req, res) => {};
 
 export default {
