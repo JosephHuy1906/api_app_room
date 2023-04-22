@@ -5,7 +5,7 @@ const getAllPart = async (req, res) => {
     const data = await Partitiined.find();
     return data;
 };
-const getDetailPart = async () => {
+const getDetailPart = async (id) => {
     const detail = await Partitiined.findById(id);
     return detail ?? {};
 };

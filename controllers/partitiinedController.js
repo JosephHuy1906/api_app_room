@@ -8,7 +8,20 @@ const getAllPart = async (req, res) => {
         data: data,
     });
 };
-const getDetailPart = async (req, res) => {};
+const getDetailPart = async (req, res) => {
+    let id = req.params.id;
+    try {
+        const us = await partRepositories.getDetailPart(id);
+        res.status(httpStatusCode.OK).json({
+            message: 'get data successfully',
+            data: us,
+        });
+    } catch (err) {
+        res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: err.toString(),
+        });
+    }
+};
 
 const insertPart = async (req, res) => {
     const {

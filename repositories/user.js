@@ -3,10 +3,10 @@ import { Usermodel } from '../models/index.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const getDetail = async (id) =>{
+const getDetail = async (id) => {
     const detail = await Usermodel.findById(id);
-    return detail ?? {}
-}
+    return detail ?? {};
+};
 
 const login = async ({ username, password }) => {
     const isUser = await Usermodel.findOne({ username }).exec();
@@ -56,6 +56,22 @@ const register = async ({ username, fullName, password }) => {
     }
 };
 
+const updateUser = async ({ username, fullName, nameBank, numberBank }) => {
+    try {
+        const existingUser = await Usermodel.findOne({ username }).exec();
+        if (!existingUser) {
+            throw new Exception(Exception.ERROR_EXIST);
+        } else {
+            const newUser = await Usermodel.create({
+                fullName: fullName,
+                nameBank: nameBank,
+                numberBank: numberBank
+            });
+            return newUser;
+        }
+    } catch (err) {
+        throw new Exception(Exception.CANNOT_REGISTER_USER);
+    }
+};
 
-
-export default { register, login, getDetail };
+export default { register, login, getDetail, updateUser };

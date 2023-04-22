@@ -46,9 +46,9 @@ const checkTimeDay = async () => {
 
 const UpdateRoom = async () => {};
 
-const getRoomById = async (id) => {
-    const detail = await Room.findById(id);
-    return detail ?? {};
+const getRoomByIdKhu = async (id) => {
+    const detail = await Room.find({khu: id})
+    return detail;
 };
 
 const getAllRoom = async () => {
@@ -58,7 +58,7 @@ const getAllRoom = async () => {
 
 export default {
     getAllRoom,
-    getRoomById,
+    getRoomByIdKhu,
     InsertRoom,
     UpdateRoom,
     InsertPrice,

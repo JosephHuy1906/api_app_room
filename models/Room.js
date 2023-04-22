@@ -6,7 +6,7 @@ export default mongoose.model(
     new Schema({
         id: { type: ObjectId },
         name: { type: String, required: true },
-        idKhu: { type: String, required: true },
+        Khu: { type: String, required: true },
         tienPhong: { type: Number, required: true },
         tienThueThang: [
             {

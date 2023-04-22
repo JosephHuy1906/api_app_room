@@ -11,7 +11,7 @@ const getAllRoom = async (req, res) => {
 const getDetailRoom = async (req, res) => {
     let id = req.params.id;
     try {
-        const us = await roomRepositories.getRoomById(id);
+        const us = await roomRepositories.getRoomByIdKhu(id);
         res.status(httpStatusCode.OK).json({
             message: 'get data successfully',
             data: us,
