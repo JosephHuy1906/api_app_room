@@ -1,6 +1,7 @@
 import Exception from '../exceptions/Exception.js';
 import { Room } from '../models/index.js';
 
+
 const InsertRoom = async ({ idKhu, name, tienPhong = [], khachThue = [] }) => {
     try {
         const room = await Room.create({
@@ -32,7 +33,9 @@ const InsertGuest = async ({ id, khachThue }) => {
 };
 
 const checkTimeDay = async () => {
+
     const collection = Room.find();
+
     const eventsCollection = context.services.get('mongodb-atlas').db('myDatabase').collection('events');
     const now = new Date();
     const docs = await collection.find({ active: true, expiration_date: { $lte: now } }).toArray();

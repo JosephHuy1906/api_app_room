@@ -9,12 +9,13 @@ const connect = async () => {
         print('connect mongoose successfull', OutputType.SUCCESS);
         return connection;
     } catch (err) {
-        if (err.code == 8000) {
-            throw new Exception(Exception.WRONG_DB_USERNAME_PASSWORD);
-        } else if (err.code == 'ENOTFOUND') {
-            throw new Exception(Exception.WRONG_SERVER_NAME);
-        }
-        throw new Exception(Exception.CANNOT_CONNECT_MONGODB);
+        // if (err.code == 8000) {
+        //     throw new Exception(Exception.WRONG_DB_USERNAME_PASSWORD);
+        // } else if (err.code == 'ENOTFOUND') {
+        //     throw new Exception(Exception.WRONG_SERVER_NAME);
+        // }
+        // throw new Exception(Exception.CANNOT_CONNECT_MONGODB);
+        console.log(err);
     }
 };
 
