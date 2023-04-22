@@ -1,6 +1,6 @@
 import { body, validationResult } from 'express-validator';
 import httpStatusCode from '../exceptions/httpStatusCode.js';
-import { user } from '../repositories/index.js';
+import {  user } from '../repositories/index.js';
 import { Usermodel } from '../models/index.js';
 import Exception from '../exceptions/Exception.js';
 
