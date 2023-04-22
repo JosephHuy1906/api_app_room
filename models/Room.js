@@ -33,11 +33,9 @@ export default mongoose.model(
                 fullName: { type: String },
                 phone: { type: String },
                 cccd: { type: String },
-<<<<<<< HEAD
                 ngaySinh: { type: String },
                 diaChi: { type: String },
-=======
->>>>>>> 08b79ba0d0377e9bb9f3afb1f8aafdf1e905d7b2
+
             },
         ],
     }),
