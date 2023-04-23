@@ -1,11 +1,11 @@
 import Exception from '../exceptions/Exception.js';
 import { Room } from '../models/index.js';
+import moment from 'moment/moment.js';
 
-
-const InsertRoom = async ({ idKhu, name, tienPhong,tienThueThang = [], khachThue = [] }) => {
+const InsertRoom = async ({ khu, name, tienPhong, tienThueThang = [], khachThue = [] }) => {
     try {
         const room = await Room.create({
-            idKhu,
+            khu,
             name,
             tienPhong,
             tienThueThang,
@@ -33,34 +33,40 @@ const InsertGuest = async ({ id, khachThue }) => {
     return roomId;
 };
 
-const checkTimeDay = async () => {
-
-    const collection = Room.find();
-    const eventsCollection = context.services.get('mongodb-atlas').db('myDatabase').collection('events');
-    const now = new Date();
-    const docs = await collection.find({ active: true, expiration_date: { $lte: now } }).toArray();
-    for (const doc of docs) {
-        await eventsCollection.insertOne({ document_id: doc._id, event_type: 'document_expired', event_date: now });
-    }
+const UpdateRoom = async ({ id, name, tienPhong }) => {
+    const data = await Room.findById(id);
+    data.name = name ?? data.name;
+    data.tienPhong = tienPhong ?? data.tienPhong;
+    data.save();
+    return data;
 };
-
-const UpdateRoom = async () => {};
 
 const getRoomByIdKhu = async (id) => {
-    const detail = await Room.find({khu: id})
+    const detail = await Room.find({ khu: id });
     return detail;
 };
-
+const getDetailRoom = async (id) => {
+    const detail = await Room.findById(id);
+    return detail;
+};
 const getAllRoom = async () => {
     const data = await Room.find();
     return data;
 };
 
+const checkTimeDay = async () => {
+    const day = moment().format("YYYY-MM-DD")
+    const data = await Room.find({"tienThueThang.expirationDate": "2023-05-20"},{});
+    console.log(data);
+};
+
 export default {
     getAllRoom,
     getRoomByIdKhu,
+    getDetailRoom,
     InsertRoom,
     UpdateRoom,
     InsertPrice,
     InsertGuest,
+    checkTimeDay,
 };

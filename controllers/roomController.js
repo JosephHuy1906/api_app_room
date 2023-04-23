@@ -8,10 +8,24 @@ const getAllRoom = async (req, res) => {
         data: data,
     });
 };
-const getDetailRoom = async (req, res) => {
+const getRoomByKhu = async (req, res) => {
     let id = req.params.id;
     try {
         const us = await roomRepositories.getRoomByIdKhu(id);
+        res.status(httpStatusCode.OK).json({
+            message: 'get data successfully',
+            data: us,
+        });
+    } catch (err) {
+        res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: err.toString(),
+        });
+    }
+};
+const getDetailRoom = async (req, res) => {
+    let id = req.params.id;
+    try {
+        const us = await roomRepositories.getDetailRoom(id);
         res.status(httpStatusCode.OK).json({
             message: 'get data successfully',
             data: us,
@@ -55,7 +69,7 @@ const InsertGuest = async (req, res) => {
 
     try {
         const roomId = await roomRepositories.InsertGuest(req.body);
-        res.status(httpStatusCode.OK).json({
+        res.status(httpStatusCode.INSERT_OK).json({
             message: 'Insert Guest Room successfuly',
         });
     } catch (err) {
@@ -65,8 +79,24 @@ const InsertGuest = async (req, res) => {
     }
 };
 
-const updateGuest = async (req, res) => {};
-const getIdGuest = async (req, res) => {};
+const updateRoom = async (req, res) => {
+    const { id, name, tienPhong } = req.body;
+
+    try {
+        const roomId = await roomRepositories.UpdateRoom(req.body);
+        res.status(httpStatusCode.INSERT_OK).json({
+            message: 'Update Room successfuly',
+        });
+    } catch (err) {
+        res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: 'Cannot Insert Price Room: ' + err,
+        });
+    }
+};
+const checkDay = async (req, res) => {
+    const check = await roomRepositories.checkTimeDay()
+    res.json({day: check, message: "Thành công"})
+};
 const deleteRoom = async (req, res) => {};
 
 export default {
@@ -76,6 +106,7 @@ export default {
     deleteRoom,
     InsertPrice,
     InsertGuest,
-    updateGuest,
-    getIdGuest,
+    updateRoom,
+    getRoomByKhu,
+    checkDay,
 };

@@ -37,7 +37,7 @@ const login = async ({ username, password }) => {
     }
 };
 
-const register = async ({ username, fullName, password }) => {
+const register = async ({ username, fullName, password, nameBank, numberBank }) => {
     try {
         const existingUser = await Usermodel.findOne({ username }).exec();
         if (!!existingUser) {
@@ -48,6 +48,8 @@ const register = async ({ username, fullName, password }) => {
         const newUser = await Usermodel.create({
             username: username,
             fullName: fullName,
+            nameBank: nameBank,
+            numberBank: numberBank,
             password: hashPass,
         });
         return newUser;
