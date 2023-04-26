@@ -71,7 +71,7 @@ const updateUser = async ({ username, fullName, nameBank, numberBank }) => {
     try {
         const existingUser = await Usermodel.findOne({ username }).exec();
         if (!existingUser) {
-            throw new Exception(Exception.ERROR_EXIST);
+            throw new Exception(Exception.ERROR_EXIST_ROOM);
         } else {
             const newUser = await Usermodel.create({
                 fullName: fullName,
