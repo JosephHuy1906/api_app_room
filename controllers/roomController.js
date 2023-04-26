@@ -2,7 +2,7 @@ import httpStatusCode from '../exceptions/httpStatusCode.js';
 import { roomRepositories } from '../repositories/index.js';
 
 const getAllRoom = async (req, res) => {
-    let page = req.query.page
+    let page = req.query.page;
     let data = await roomRepositories.getAllRoom(page);
     res.status(httpStatusCode.OK).json({
         message: 'get data successfully',
@@ -11,7 +11,7 @@ const getAllRoom = async (req, res) => {
 };
 const getRoomByKhu = async (req, res) => {
     let id = req.query.id;
-    let page = req.query.page
+    let page = req.query.page;
     try {
         const us = await roomRepositories.getRoomByIdKhu(id, page);
         res.status(httpStatusCode.OK).json({
@@ -38,7 +38,7 @@ const getDetailRoom = async (req, res) => {
         });
     }
 };
-const getPriceByRoomId = async (req, res) =>{
+const getPriceByRoomId = async (req, res) => {
     let id = req.query.id;
 
     try {
@@ -52,7 +52,7 @@ const getPriceByRoomId = async (req, res) =>{
             message: err.toString(),
         });
     }
-}
+};
 const createRoom = async (req, res) => {
     try {
         const room = await roomRepositories.InsertRoom(req.body);
@@ -82,15 +82,15 @@ const InsertPrice = async (req, res) => {
 };
 const InsertGuest = async (req, res) => {
     const { id, khachThue } = req.body;
-
     try {
         const roomId = await roomRepositories.InsertGuest(req.body);
+
         res.status(httpStatusCode.INSERT_OK).json({
             message: 'Insert Guest Room successfuly',
         });
     } catch (err) {
-        res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({
-            message: 'Cannot Insert Guest Room: ' + err,
+        res.status(httpStatusCode.BAD_REQUEST).json({
+            message: err.toString(),
         });
     }
 };
@@ -129,5 +129,5 @@ export default {
     getRoomByKhu,
     checkDay,
     thongKeMonth,
-    getPriceByRoomId
+    getPriceByRoomId,
 };
