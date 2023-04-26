@@ -6,6 +6,8 @@ export default class Exception extends Error {
     static ERROR_EXIST = 'User already exists';
     static CANNOT_REGISTER_USER = 'Cannot register user';
     static WRONG_USERNAME_PASSWORD = 'Wrong username and password';
+    static TOKEN_NOT_CORRECT = 'Token is not correct';
+    static WRONG_TOKEN = 'Wrong token';
 
     constructor(message, validationError = {}) {
         super(message);

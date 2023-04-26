@@ -12,7 +12,6 @@ const login = async ({ username, password }) => {
     const isUser = await Usermodel.findOne({ username }).exec();
     if (isUser) {
         const isPass = await bcrypt.compare(password, isUser.password);
-
         if (!!isPass) {
             let token = jwt.sign(
                 {
@@ -23,7 +22,6 @@ const login = async ({ username, password }) => {
                     expiresIn: '7 days',
                 },
             );
-
             return {
                 ...isUser.toObject(),
                 password: 'not show',
@@ -57,7 +55,18 @@ const register = async ({ username, fullName, password, nameBank, numberBank }) 
         throw new Exception(Exception.CANNOT_REGISTER_USER);
     }
 };
-
+const partToken = async (token) => {
+    try {
+        let kq = jwt.verify(token, process.env.JWT_SECRET);
+        if (!kq) {
+            throw new Exception(Exception.TOKEN_NOT_CORRECT);
+        } else {
+            return kq;
+        }
+    } catch (err) {
+        throw new Exception(Exception.WRONG_TOKEN);
+    }
+};
 const updateUser = async ({ username, fullName, nameBank, numberBank }) => {
     try {
         const existingUser = await Usermodel.findOne({ username }).exec();
@@ -67,7 +76,7 @@ const updateUser = async ({ username, fullName, nameBank, numberBank }) => {
             const newUser = await Usermodel.create({
                 fullName: fullName,
                 nameBank: nameBank,
-                numberBank: numberBank
+                numberBank: numberBank,
             });
             return newUser;
         }
@@ -76,4 +85,10 @@ const updateUser = async ({ username, fullName, nameBank, numberBank }) => {
     }
 };
 
-export default { register, login, getDetail, updateUser };
+export default {
+    register,
+    login,
+    getDetail,
+    updateUser,
+    partToken,
+};

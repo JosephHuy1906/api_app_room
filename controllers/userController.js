@@ -9,7 +9,6 @@ const login = async (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(httpStatusCode.BAD_REQUEST).json({ errors: errors.array() });
     }
-
     const { username, password } = req.body;
     try {
         let existUser = await user.login({ username, password });
@@ -49,7 +48,6 @@ const getDetail = async (req, res) => {
 
 const register = async (req, res) => {
     const { fullName, username, password, nameBank, numberBank } = req.body;
-
     try {
         const data = await user.register({
             fullName,
@@ -68,10 +66,20 @@ const register = async (req, res) => {
         });
     }
 };
+const partToken = async (req, res) => {
+    try {
+        const token = req.params.id;
+        const data = await user.partToken(token);
+        res.status(httpStatusCode.OK).json({ data: data });
+    } catch (err) {
+        res.status(httpStatusCode.BAD_REQUEST).json({ message: err.toString() });
+    }
+};
 
 export default {
     login,
     register,
     getAll,
     getDetail,
+    partToken,
 };
