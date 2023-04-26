@@ -2,14 +2,16 @@ import httpStatusCode from '../exceptions/httpStatusCode.js';
 import { roomRepositories } from '../repositories/index.js';
 
 const getAllRoom = async (req, res) => {
-    let data = await roomRepositories.getAllRoom();
+    let page = req.query.page
+    let data = await roomRepositories.getAllRoom(page);
     res.status(httpStatusCode.OK).json({
         message: 'get data successfully',
         data: data,
     });
 };
 const getRoomByKhu = async (req, res) => {
-    let id = req.params.id;
+    let id = req.query.id;
+    let page = req.query.page
     try {
         const us = await roomRepositories.getRoomByIdKhu(id);
         res.status(httpStatusCode.OK).json({
@@ -36,6 +38,22 @@ const getDetailRoom = async (req, res) => {
         });
     }
 };
+const getPriceByRoomId = async (req, res) =>{
+    let id = req.query.id;
+    let page = req.query.page;
+
+    try {
+        const us = await roomRepositories.getPriceByRoomId(id, page);
+        res.status(httpStatusCode.OK).json({
+            message: 'get data successfully',
+            data: us,
+        });
+    } catch (err) {
+        res.status(httpStatusCode.INTERNAL_SERVER_ERROR).json({
+            message: err.toString(),
+        });
+    }
+}
 const createRoom = async (req, res) => {
     try {
         const room = await roomRepositories.InsertRoom(req.body);
@@ -63,7 +81,6 @@ const InsertPrice = async (req, res) => {
         });
     }
 };
-
 const InsertGuest = async (req, res) => {
     const { id, khachThue } = req.body;
 
@@ -94,11 +111,14 @@ const updateRoom = async (req, res) => {
     }
 };
 const checkDay = async (req, res) => {
-    const check = await roomRepositories.checkTimeDay()
-    res.json({day: check, message: "Thành công"})
+    const check = await roomRepositories.checkTimeDay();
+    res.status(httpStatusCode.OK).json({ data: check, message: 'Phòng đến hạn nộp tiền' });
 };
 const deleteRoom = async (req, res) => {};
-
+const thongKeMonth = async (req, res) => {
+    const data = await roomRepositories.thongKeMonth();
+    res.status(httpStatusCode.OK).json({ data: data, message: 'Thành công' });
+};
 export default {
     getAllRoom,
     getDetailRoom,
@@ -109,4 +129,6 @@ export default {
     updateRoom,
     getRoomByKhu,
     checkDay,
+    thongKeMonth,
+    getPriceByRoomId
 };

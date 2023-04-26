@@ -21,14 +21,18 @@ export default mongoose.model(
                     type: Date,
                     default: Date.now,
                 },
-                expirationDate: {
-                    type: Date,
-                    default: function () {
-                        return new Date(this.initializationDate.getTime() + 28 * 24 * 60 * 60 * 1000);
-                    },
-                },
             },
         ],
+        initializationDate: {
+            type: String,
+        },
+        expirationDate: {
+            type: String,
+        },
+        isBaking:{
+            type: Number,
+            default: 0
+        },
         khachThue: [
             {
                 id: { type: ObjectId },
