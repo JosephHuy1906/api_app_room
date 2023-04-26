@@ -13,7 +13,7 @@ const getRoomByKhu = async (req, res) => {
     let id = req.query.id;
     let page = req.query.page
     try {
-        const us = await roomRepositories.getRoomByIdKhu(id);
+        const us = await roomRepositories.getRoomByIdKhu(id, page);
         res.status(httpStatusCode.OK).json({
             message: 'get data successfully',
             data: us,
@@ -40,10 +40,9 @@ const getDetailRoom = async (req, res) => {
 };
 const getPriceByRoomId = async (req, res) =>{
     let id = req.query.id;
-    let page = req.query.page;
 
     try {
-        const us = await roomRepositories.getPriceByRoomId(id, page);
+        const us = await roomRepositories.getPriceByRoomId(id);
         res.status(httpStatusCode.OK).json({
             message: 'get data successfully',
             data: us,

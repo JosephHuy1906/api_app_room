@@ -32,9 +32,10 @@ const InsertPrice = async ({ id, tienThueThang }) => {
     await data.save();
     return data;
 };
-const getPriceByRoomId = async ({ id, page }) => {
-    let price = await Room.findById(id)
-    return price;
+const getPriceByRoomId = async ({ id }) => {
+    const data = await Room.findOne({ id: id }).select('tienThueThang');
+    const tienThueThang = data.tienThueThang;
+    return tienThueThang;
 };
 const InsertGuest = async ({ id, khachThue }) => {
     const roomId = await Room.findById(id);
