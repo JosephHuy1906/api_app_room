@@ -81,6 +81,40 @@ paths:
             responses:
                 default:
                     description: successful operation
+    /apiuser/detail/{id}:
+        get:
+          tags:
+            - user
+          summary: get detail by id
+          description: Returns a single pet
+          operationId: getPetById
+          parameters:
+            - name: _id
+              in: path
+              description: id of user to return
+              required: true
+              schema:
+                type: string
+                example: "6444dd0868bb3af87a410545"
+          responses:
+            '200':
+              description: successful operation
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/User'          
+                application/xml:
+                  schema:
+                    $ref: '#/components/schemas/User'
+            '400':
+              description: Invalid username supplied
+            '404':
+              description: user not found
+          security:
+            - api_key: []
+            - petstore_auth:
+                - write:users
+                - read:users              
     /apiuser/updateuser/{username}:
         put:
             tags:
