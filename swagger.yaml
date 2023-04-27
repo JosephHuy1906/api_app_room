@@ -122,13 +122,6 @@ paths:
             summary: Update user
             description: This can only be done by the logged in user.
             operationId: updateUser
-            parameters:
-                - name: username
-                  in: path
-                  description: name that need to be deleted
-                  required: true
-                  schema:
-                      type: string
             requestBody:
                 description: Update an existent user in the store
                 content:
@@ -182,6 +175,9 @@ components:
         UpdateUser:
             type: object
             properties:
+                username:
+                    type: string
+                    example: '036484128'
                 fullName:
                     type: string
                     example: 'Nguyễn Văn Tình'
