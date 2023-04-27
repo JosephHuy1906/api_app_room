@@ -13,6 +13,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/apiuser', userRouter);
 app.use('/apiroom', roomRouter);
 app.use('/apipartitiinde', partitiinedRouter);
+app.use(
+    cors({
+        origin: '*',
+    }),
+);
 
 app.listen(port, async () => {
     await connect();
