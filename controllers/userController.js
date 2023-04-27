@@ -75,11 +75,25 @@ const partToken = async (req, res) => {
         res.status(httpStatusCode.BAD_REQUEST).json({ message: err.toString() });
     }
 };
+const updateUser = async (req, res) => {
+    const { username, fullName, nameBank, numberBank } = req.body;
+    try {
+        const roomId = await user.updateUser(req.body);
 
+        res.status(httpStatusCode.INSERT_OK).json({
+            message: 'Update user successfuly',
+        });
+    } catch (err) {
+        res.status(httpStatusCode.BAD_REQUEST).json({
+            message: err.toString(),
+        });
+    }
+};
 export default {
     login,
     register,
     getAll,
     getDetail,
     partToken,
+    updateUser,
 };

@@ -1,5 +1,4 @@
 import express from 'express';
-
 import { roomController } from '../controllers/index.js';
 const router = express.Router();
 
@@ -13,7 +12,5 @@ router.post('/create', roomController.createRoom);
 router.get('/checkday', roomController.checkDay);
 router.get('/thongkemonth', roomController.thongKeMonth);
 router.get('/getpriceroom/', roomController.getPriceByRoomId);
-
-
 
 export default router;

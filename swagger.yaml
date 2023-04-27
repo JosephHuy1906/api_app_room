@@ -1,0 +1,192 @@
+openapi: 3.0.3
+info:
+    title: Swagger app Room
+    description: api app Trọ trung chánh
+    version: 1.0.11
+servers:
+    - url: https://api-app-room.onrender.com/
+tags:
+    - name: user
+      description: Operations about user
+    - name: room
+      description: Everything query room
+      externalDocs:
+          description: Find out more
+          url: http://swagger.io
+paths:
+
+    /apiuser/login:
+        post:
+            tags:
+                - user
+            summary: Login user
+            description: This can only be done by the logged in user.
+            operationId: login
+            requestBody:
+                description: Login user
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Login'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Login'
+                    application/x-www-form-urlencoded:
+                        schema:
+                            $ref: '#/components/schemas/Login'
+            responses:
+                default:
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/User'
+    /apiuser/register:
+        post:
+            tags:
+                - user
+            summary: Creates users 
+            description: register user
+            operationId: register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/User'
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                default:
+                    description: successful operation
+    /apiuser/parttoken/{id}:
+        get:
+            tags:
+                - user
+            summary: Part token by ID
+            description: ''
+            operationId: parttoken
+            parameters: []
+            responses:
+                default:
+                    description: successful operation
+    /apiuser/updateuser/{username}:
+        put:
+            tags:
+                - user
+            summary: Update user
+            description: This can only be done by the logged in user.
+            operationId: updateUser
+            parameters:
+                - name: username
+                  in: path
+                  description: name that need to be deleted
+                  required: true
+                  schema:
+                      type: string
+            requestBody:
+                description: Update an existent user in the store
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateUser'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/UpdateUser'
+                    application/x-www-form-urlencoded:
+                        schema:
+                            $ref: '#/components/schemas/UpdateUser'
+            responses:
+                default:
+                    description: successful operation
+components:
+    schemas:
+        User:
+            type: object
+            properties:
+                id:
+                    type: string
+                    format: string
+                    example: 6444dd0868bb3af87a410545
+                username:
+                    type: string
+                    example: 0935109223
+                fullName:
+                    type: string
+                    example: Nguyễn Văn Tình
+                password:
+                    type: string
+                    example: '12a1huy'
+                nameBank:
+                    type: string
+                    example: 'TechComBank'
+                numberBank:
+                    type: string
+                    example: '19035020412010'
+            xml:
+                name: user
+        Login:
+            type: object
+            properties:
+                username:
+                    type: string
+                    example: '0935109223'
+                password:
+                    type: string
+                    example: '123456'
+        UpdateUser:
+            type: object
+            properties:
+                fullName:
+                    type: string
+                    example: 'Nguyễn Văn Tình'
+                nameBank:
+                    type: string
+                    example: '123456'
+                numberBank:
+                    type: string
+                    example: 'ReckComBank'
+       
+
+    requestBodies:
+        Pet:
+            description: Pet object that needs to be added to the store
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Pet'
+                application/xml:
+                    schema:
+                        $ref: '#/components/schemas/Pet'
+        UserArray:
+            description: List of user object
+            content:
+                application/json:
+                    schema:
+                        type: array
+                        items:
+                            $ref: '#/components/schemas/User'
+    securitySchemes:
+        petstore_auth:
+            type: oauth2
+            flows:
+                implicit:
+                    authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+                    scopes:
+                        write:pets: modify pets in your account
+                        read:pets: read your pets
+        api_key:
+            type: apiKey
+            name: api_key
+            in: header
