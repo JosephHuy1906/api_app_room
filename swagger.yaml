@@ -89,7 +89,7 @@ paths:
           description: Returns a single pet
           operationId: getPetById
           parameters:
-            - name: _id
+            - name: id
               in: path
               description: id of user to return
               required: true
@@ -171,7 +171,7 @@ components:
                     example: '0935109223'
                 password:
                     type: string
-                    example: '123456'
+                    example: '23071983'
         UpdateUser:
             type: object
             properties:
@@ -183,7 +183,7 @@ components:
                     example: 'Nguyễn Văn Tình'
                 nameBank:
                     type: string
-                    example: '123456'
+                    example: '23071983'
                 numberBank:
                     type: string
                     example: 'ReckComBank'
