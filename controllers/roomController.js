@@ -39,7 +39,7 @@ const getDetailRoom = async (req, res) => {
     }
 };
 const getPriceByRoomId = async (req, res) => {
-    let id = req.query.id;
+    let id = req.params.id;
 
     try {
         const us = await roomRepositories.getPriceByRoomId(id);

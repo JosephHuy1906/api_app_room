@@ -14,7 +14,6 @@ tags:
           description: Find out more
           url: http://swagger.io
 paths:
-
     /apiuser/login:
         post:
             tags:
@@ -48,7 +47,7 @@ paths:
         post:
             tags:
                 - user
-            summary: Creates users 
+            summary: Creates users
             description: register user
             operationId: register
             requestBody:
@@ -77,44 +76,50 @@ paths:
             summary: Part token by ID
             description: ''
             operationId: parttoken
-            parameters: []
+            parameters:
+                - name: id
+                  in: path
+                  description: token is login
+                  schema:
+                      type: string
+                      example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjY0NDRkZDA4NjhiYjNhZjg3YTQxMDU0NSIsInVzZXJuYW1lIjoiMDkzNTEwOTIyMyIsInBhc3N3b3JkIjoiJDJiJDEwJEFvdW14TXlHWmwvWHZkcHdhVHZZYXV4UjZzSkdZbE1MS1dDR29jS0k0Z1ZxVGlNMmpkMklHIiwiZnVsbE5hbWUiOiJOZ3V54buFbiBWxINuIFTDrG5oIiwibmFtZUJhbmsiOiJUZWNoQ29tQmFuayIsIm51bWJlckJhbmsiOiIxOTAzNTAyMDQxMjAxMCIsIl9fdiI6MH0sImlhdCI6MTY4MzM3NjYyNywiZXhwIjoxNjgzOTgxNDI3fQ.N2bz8yh2c4SV7GXTkHbsKyurscwODfEFQuxBLjhoZHw
             responses:
                 default:
                     description: successful operation
     /apiuser/detail/{id}:
         get:
-          tags:
-            - user
-          summary: get detail by id
-          description: Returns a single pet
-          operationId: getPetById
-          parameters:
-            - name: id
-              in: path
-              description: id of user to return
-              required: true
-              schema:
-                type: string
-                example: "6444dd0868bb3af87a410545"
-          responses:
-            '200':
-              description: successful operation
-              content:
-                application/json:
+            tags:
+                - user
+            summary: get detail by id
+            description: Returns a single pet
+            operationId: getPetById
+            parameters:
+                - name: id
+                  in: path
+                  description: id of user to return
+                  required: true
                   schema:
-                    $ref: '#/components/schemas/User'          
-                application/xml:
-                  schema:
-                    $ref: '#/components/schemas/User'
-            '400':
-              description: Invalid username supplied
-            '404':
-              description: user not found
-          security:
-            - api_key: []
-            - petstore_auth:
-                - write:users
-                - read:users              
+                      type: string
+                      example: '6444dd0868bb3af87a410545'
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                '400':
+                    description: Invalid username supplied
+                '404':
+                    description: user not found
+            security:
+                - api_key: []
+                - petstore_auth:
+                      - write:users
+                      - read:users
     /apiuser/updateuser/{username}:
         put:
             tags:
@@ -137,6 +142,265 @@ paths:
             responses:
                 default:
                     description: successful operation
+    /apiroom/{id}:
+        get:
+            tags:
+                - room
+            summary: get room by partitiined
+            operationId: getroompart
+            parameters:
+                - name: id
+                  in: path
+                  description: id partitiined
+                  required: true
+                  schema:
+                    type: string
+                    example: 6444d90bf5394dcd5923bb18
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/RoomKhu'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/RoomKhu'
+                '400':
+                    description: Invalid id partitiined supplied
+                '404':
+                    description: room not found
+            security:
+                - api_key: []
+                - petstore_auth:
+                      - write:users
+                      - read:users
+    /apiroom/detail/{id}:
+        get:
+            tags:
+                - room
+            summary: get room by partitiined
+            operationId: getroomdetail
+            parameters:
+                - name: id
+                  in: path
+                  description: id partitiined
+                  required: true
+                  schema:
+                    type: string
+                    example: 6444d90bf5394dcd5923bb18
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Room'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Room'
+                '400':
+                    description: Invalid id partitiined supplied
+                '404':
+                    description: room not found
+            security:
+                - api_key: []
+                - petstore_auth:
+                      - write:room
+                      - read:room
+    /apiroom/thongkemonth/:
+        get:
+            tags: 
+                - room
+            summary: statistical by month
+            operationId: thongkethang
+            parameters: []
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Room'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Room'
+                '400':
+                    description: Invalid id partitiined supplied
+                '404':
+                    description: room not found
+            security:
+                - api_key: []
+                - petstore_auth:
+                      - write:rooms
+                      - read:rooms
+    /apiroom/getpriceroom/{id}:
+          get:
+            tags:
+                - room
+            summary: get price room by id room
+            operationId: getpriceroom
+            parameters:
+                - name: id
+                  in: path
+                  description: id room
+                  required: true
+                  schema:
+                    type: string
+                    example: 6444d90bf5394dcd5923bb18
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PriceRoomId'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/PriceRoomId'
+                '400':
+                    description: Invalid id room supplied
+                '404':
+                    description: room not found
+            security:
+                - api_key: []
+                - petstore_auth:
+                      - write:room
+                      - read:room
+    /apiroom/checkday/:
+        get:
+            tags:
+                - room
+            summary: check room time out price month
+            operationId: checkday
+            parameters: []
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Checkday'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Checkday'
+
+    /apiroom/updateprice/:
+        put:
+            tags:
+                - room
+            summary: Insert price month
+            operationId: updateprice
+            requestBody:
+                description: Update an existent price in room
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Price'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Price'
+                    application/x-www-form-urlencoded:
+                        schema:
+                            $ref: '#/components/schemas/Price'
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Price'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Price'
+                default:
+                    description: successful operation
+    /apiroom/updateguest/:
+        put:
+            tags:
+                - room
+            summary: Insert guest in room
+            operationId: insertguest
+            requestBody:
+                description: Insert an existent guest in room
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Guest'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Guest'
+                    application/x-www-form-urlencoded:
+                        schema:
+                            $ref: '#/components/schemas/Guest'
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Guest'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Guest'
+                default:
+                    description: successful operation
+    /apiroom/updateroom/:
+        put:
+            tags:
+                - room
+            summary: Update room
+            operationId: updateroom
+            requestBody:
+                description: update an existent room
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateRoom'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/UpdateRoom'
+                    application/x-www-form-urlencoded:
+                        schema:
+                            $ref: '#/components/schemas/UpdateRoom'
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateRoom'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/UpdateRoom'
+                default:
+                    description: successful operation
+    /apiroom/create/:
+        post:
+            tags:
+                - room
+            summary: create new room
+            operationId: createroom
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/Createroom'
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateroomSuccfully'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/CreateroomSuccfully'
+                default:
+                    description: successful operation
+
 components:
     schemas:
         User:
@@ -187,8 +451,223 @@ components:
                 numberBank:
                     type: string
                     example: 'ReckComBank'
-       
+        Room:
+            type: object
+            properties:
+                name:
+                    type: string
+                    example: 'Phòng 101'
+                khu:
+                    type: string
+                    example: '6444d90bf5394dcd5923bb18'
+                tienPhong:
+                    type: number
+                    example: 3400000
+                tienThueThang:
+                    type: object
+                    properties:
+                        tienTro:
+                            type: number
+                            example: 3400000
+                        tienDien:
+                            type: number
+                            example: 3400000
+                        tienNuoc:
+                            type: number
+                            example: 3400000
+                        tienWifi:
+                            type: number
+                            example: 3400000
+                        tienRac:
+                            type: number
+                            example: 3400000
+                        chiPhiKhac:
+                            type: number
+                            example: 3400000
+                        tongTien:
+                            type: number
+                            example: 3400000
+        RoomKhu:
+            type: object
+            properties:
+                name:
+                    type: string
+                    example: 'Phòng 101'
+                khu:
+                    type: string
+                    example: '6444d90bf5394dcd5923bb18'
+                tienPhong:
+                    type: number
+                    example: 3400000
+                tienThueThang:
+                    type: object
+                    properties:
 
+                        tienTro:
+                            type: number
+                            example: 3400000
+                        tienDien:
+                            type: number
+                            example: 3400000
+                        tienNuoc:
+                            type: number
+                            example: 3400000
+                        tienWifi:
+                            type: number
+                            example: 3400000
+                        tienRac:
+                            type: number
+                            example: 3400000
+                        chiPhiKhac:
+                            type: number
+                            example: 3400000
+                        tongTien:
+                            type: number
+                            example: 3400000
+        Price:
+            type: object
+            properties:
+                id: 
+                    type: string
+                    example: 6446702bc2c9dd70a6725e2d
+                tienThueThang:
+                    type: object
+                    properties:
+                        tienTro:
+                            type: number
+                            example: 3400000
+                        tienDien:
+                            type: number
+                            example: 3400000
+                        tienNuoc:
+                            type: number
+                            example: 3400000
+                        tienWifi:
+                            type: number
+                            example: 3400000
+                        tienRac:
+                            type: number
+                            example: 3400000
+                        chiPhiKhac:
+                            type: number
+                            example: 3400000
+                        tongTien:
+                            type: number
+                            example: 3400000
+        Guest:
+            type: object
+            properties:
+                id: 
+                    type: string
+                    example: 6446702bc2c9dd70a6725e2d
+                khachThue:
+                    type: object
+                    properties:
+                        fullName:
+                            type: string
+                            example: "Nguyen Quang Huy"
+                        phone:
+                            type: string
+                            example: "0364254852"
+                        cccd:
+                            type: string
+                            example: "0015145224"
+                        ngaySinh:
+                            type: string
+                            example: "19-06-2000"
+                        diaChi:
+                            type: string
+                            example: "go vap, Ho Chi Minh"
+        PriceRoomId: 
+            type: object
+            properties:
+                data: 
+                    type: object
+                    properties:
+                        _id: 
+                            type: object
+                            properties: 
+                                month: 
+                                    type: number
+                                    example: 5
+                                year: 
+                                    type: number
+                                    example: 2023
+                        totalTongTien:
+                            type: number
+                            example: 12350000
+        UpdateRoom:
+            type: object
+            properties:
+                id: 
+                    type: string
+                    example: "6446702bc2c9dd70a6725e2d"
+                name:
+                    type: string
+                    example: "Phòng 201"
+                tienPhong:
+                    type: number
+                    example: 23564000
+        Createroom: 
+            type: object
+            properties:
+                khu: 
+                    type: string
+                    example: "a1dad1a"
+                    required: true
+                name: 
+                    type: string
+                    example: "Phòng 101"
+                    required: true
+                tienPhong: 
+                    type: number
+                    example: 2485642
+                    required: true
+        CreateroomSuccfully: 
+            type: object
+            properties:
+                id: 
+                    type: string
+                    example: "a1dad1a"
+                khu: 
+                    type: string
+                    example: "a1dad1a"
+                name: 
+                    type: string
+                    example: "Phòng 101"
+                tienPhong: 
+                    type: number
+                    example: 2485642
+                tienThueThang:
+                    type: array
+                    example: []
+                khachThue:
+                    type: array
+                    example: []
+                initializationDate:
+                    type: string
+                    example: "2023-05-01"
+                expirationDate:
+                    type: string
+                    example: "2023-06-01"
+        Checkday: 
+            type: object
+            properties:
+                id: 
+                    type: string
+                    example: "64467058c2c9dd70a6725e37"
+                name:
+                    type: string
+                    example: "Phòng 201" 
+                khu:
+                    type: string
+                    example: "6444d929f5394dcd5923bb1a"
+                expirationDate:
+                    type: string
+                    example: "2023-05-22" 
+                isBaking:
+                    type: number
+                    example: 1
     requestBodies:
         Pet:
             description: Pet object that needs to be added to the store
