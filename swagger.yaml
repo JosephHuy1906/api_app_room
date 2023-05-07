@@ -10,9 +10,8 @@ tags:
       description: Operations about user
     - name: room
       description: Everything query room
-      externalDocs:
-          description: Find out more
-          url: http://swagger.io
+    - name: partitiined
+      description: All query partitiined
 paths:
     /apiuser/login:
         post:
@@ -284,7 +283,6 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Checkday'
-
     /apiroom/updateprice/:
         put:
             tags:
@@ -400,7 +398,100 @@ paths:
                                 $ref: '#/components/schemas/CreateroomSuccfully'
                 default:
                     description: successful operation
-
+    /apipartitiinde/: 
+        get:    
+            tags:
+                - partitiined
+            summary: get all partitiined
+            operationId: partid
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Partitiined'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Partitiined'
+                default:
+                    description: successful operation
+    /apipartitiinde/detail/{id}:
+        get:
+            tags:
+                - partitiined
+            summary: get detail partitiined by id
+            operationId: detailpartitiined
+            parameters:
+                - name: id
+                  in: path
+                  description: id room
+                  required: true
+                  schema:
+                    type: string
+                    example: 6444d90bf5394dcd5923bb18
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Partitiined'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Partitiined'
+                default:
+                    description: successful operation
+    /apipartitiinde/insert:
+        post:
+            tags:
+                - partitiined
+            summary: Insert new partitiined
+            operationId: insertparitiined
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/Partitiined'
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Partitiined'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Partitiined'
+                default:
+                    description: successful operation
+    /apipartitiinde/update:
+        put:
+            tags:
+                - partitiined
+            summary: update partitiined by id partitiined
+            operationId: updatepartitiined
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/PartitiinedUpdate'
+            responses:
+                '200':
+                    description: Successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Partitiined'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Partitiined'
+                default:
+                    description: successful operation
 components:
     schemas:
         User:
@@ -668,6 +759,51 @@ components:
                 isBaking:
                     type: number
                     example: 1
+        Partitiined:
+            type: object
+            properties: 
+                id:
+                    type: string
+                    example: 64467058c2c9dd70a6725e37
+                name:
+                    type: string
+                    example: Khu A
+                price: 
+                    type: object
+                    properties:
+                        tienNuoc: 
+                            type: number
+                            example: 25000
+                        tienDien:
+                            type: number
+                            example: 3500
+                        tienRac:
+                            type: number
+                            example: 30000
+                        tienWifi:
+                            type: number
+                            example: 60000
+        PartitiinedUpdate:
+            type: object
+            properties: 
+                id:
+                    type: string
+                    example: 64467058c2c9dd70a6725e37
+                name:
+                    type: string
+                    example: Khu A
+                tienNuoc: 
+                    type: number
+                    example: 25000
+                tienDien:
+                    type: number
+                    example: 3500
+                tienRac:
+                    type: number
+                    example: 30000
+                tienWifi:
+                    type: number
+                    example: 60000
     requestBodies:
         Pet:
             description: Pet object that needs to be added to the store
