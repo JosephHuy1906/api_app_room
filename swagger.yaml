@@ -25,7 +25,9 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/User'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/User'
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/User'
@@ -177,10 +179,14 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Room'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Room'
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Room'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Room'
                 '404':
                     description: room not found
             security:
@@ -208,10 +214,14 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/RoomKhu'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/RoomKhu'
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/RoomKhu'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/RoomKhu'
                 '400':
                     description: Invalid id partitiined supplied
                 '404':
@@ -300,10 +310,14 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/PriceRoomId'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/PriceRoomId'
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/PriceRoomId'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/PriceRoomId'
                 '400':
                     description: Invalid id room supplied
                 '404':
@@ -326,10 +340,14 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Checkday'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Checkday'
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Checkday'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Checkday'
     /apiroom/updateprice/:
         put:
             tags:
@@ -458,10 +476,14 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Partitiined'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Partitiined'
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Partitiined'
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Partitiined'
                 default:
                     description: successful operation
     /apipartitiinde/detail/{id}:
