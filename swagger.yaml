@@ -13,6 +13,29 @@ tags:
     - name: partitiined
       description: All query partitiined
 paths:
+    /apiuser/:
+        get:
+            tags:
+                - user
+            summary: get all user
+            operationId: getalluser
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                '404':
+                    description: User not found
+            security:
+                - api_key: []
+                - petstore_auth:
+                      - write:users
+                      - read:users
     /apiuser/login:
         post:
             tags:
@@ -141,7 +164,31 @@ paths:
             responses:
                 default:
                     description: successful operation
-    /apiroom/{id}:
+   
+    /apiroom/:
+        get:
+            tags:
+                - room
+            summary: get all room
+            operationId: getallroom
+            responses:
+                '200':
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Room'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Room'
+                '404':
+                    description: room not found
+            security:
+                - api_key: []
+                - petstore_auth:
+                      - write:rooms
+                      - read:rooms
+    /apiroom/khu/{id}:
         get:
             tags:
                 - room
@@ -398,6 +445,7 @@ paths:
                                 $ref: '#/components/schemas/CreateroomSuccfully'
                 default:
                     description: successful operation
+
     /apipartitiinde/: 
         get:    
             tags:
