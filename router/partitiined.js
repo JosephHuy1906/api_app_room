@@ -7,5 +7,4 @@ router.get('/detail/:id', partitiinedController.getDetailPart);
 router.post('/insert', partitiinedController.insertPart);
 router.put('/update', partitiinedController.updatePart);
 
-
 export default router;
