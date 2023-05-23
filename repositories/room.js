@@ -101,7 +101,7 @@ const getAllRoom = async (page) => {
 const checkTimeDay = async () => {
     const day = moment().format('YYYY-MM-DD');
     const data = await Room.find({ isBaking: 1 }, 'name khu expirationDate isBaking');
-    const filter = { expirationDate: '2023-0-24', isBaking: 0 };
+    const filter = { expirationDate: day, isBaking: 0 };
     if (filter) {
         const projection = { isBaking: 1 };
         await Room.find(filter, projection);
